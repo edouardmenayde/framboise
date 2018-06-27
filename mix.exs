@@ -7,6 +7,7 @@ defmodule Framboise.MixProject do
       version: "0.1.0",
       elixir: "~> 1.6",
       description: description(),
+      package: package(),
       deps: deps(),
       name: "Framboise",
       source_url: "https://github.com/edouardmenayde/framboise"
@@ -31,6 +32,18 @@ defmodule Framboise.MixProject do
       {:explode, ">= 1.0.0"},
       {:phoenix, ">= 1.3.0"},
       {:ex_doc, "~> 0.13.0", only: [:docs, :dev]}
+    ]
+  end
+
+  defp package() do
+    [
+      # These are the default files included in the package
+      maintainers: ["Edouard Menayde"],
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      licenses: ["Apache 2.0"],
+      links: %{
+        "GitHub" => "https://github.com/edouardmenayde/framboise"
+      }
     ]
   end
 end
