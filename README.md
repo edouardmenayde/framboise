@@ -1,6 +1,6 @@
 # Framboise
 
-Poenix default rest actions and associated renders for your controller.
+Phoenix default rest actions and associated renders for your controller.
 
 ## Installation
 

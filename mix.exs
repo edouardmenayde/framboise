@@ -6,9 +6,15 @@ defmodule Framboise.MixProject do
       app: :framboise,
       version: "0.1.0",
       elixir: "~> 1.6",
+      description: description(),
       deps: deps(),
-      name: "Framboise"
+      name: "Framboise",
+      source_url: "https://github.com/edouardmenayde/framboise"
     ]
+  end
+
+  defp description() do
+    "Phoenix default rest actions and associated renders for your controller."
   end
 
   # Run "mix help compile.app" to learn about applications.
