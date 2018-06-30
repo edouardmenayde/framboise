@@ -9,8 +9,16 @@ defmodule Framboise.MixProject do
       description: description(),
       package: package(),
       deps: deps(),
+      docs: docs(),
       name: "Framboise",
       source_url: "https://github.com/edouardmenayde/framboise"
+    ]
+  end
+
+  defp docs do
+    [
+      main: "Framboise", # The main page in the docs
+      extras: ["README.md"]
     ]
   end
 
@@ -31,7 +39,7 @@ defmodule Framboise.MixProject do
       {:ecto, ">= 2.1.0"},
       {:explode, ">= 1.0.0"},
       {:phoenix, ">= 1.3.0"},
-      {:ex_doc, "~> 0.13.0", only: [:docs, :dev]}
+      {:ex_doc, "~> 0.16", only: [:docs, :dev], runtime: false}
     ]
   end
 

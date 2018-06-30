@@ -32,6 +32,23 @@ defmodule Framboise.Actions do
     |> to_existing_atom
   end
 
+  @doc """
+  Called by the index function of your controller if not overwritten.
+  It peforms a sql query against the repo you setup your controller to use to show all records belonging to model's table choosed.
+
+  It accepts connection params such as:
+
+  - `_sort` which defaults to `"id"` used by the ecto function `Ecto.Query.order_by/3`
+  - `_limit` which defaults to `30` used by the ecto function `Ecto.Query.limit/2`
+  - `_start` which defaults to `0` used by the ecto function `Ecto.Query.offset/3`
+
+  It preloads all association listed for your model.
+
+  The response is composed of :
+
+    - the fetched records in the body
+    - a response header `x-total-count` which contains the count of your model's table
+  """
   def handle_index(conn, params, model, repo) do
     sort = to_existing_atom(params, "_sort", "id")
     #        order = to_existing_atom(params, "_order", "asc")
@@ -74,6 +91,20 @@ defmodule Framboise.Actions do
     |> Phoenix.Controller.render("index.json", records: records)
   end
 
+  @doc """
+  Called by the show function of your controller if not overwritten.
+  It peforms a sql query against the repo you setup your controller to use to show a specific requested record.
+
+  It accepts connection params such as:
+
+  - `id` used to choose query which record to show
+
+  It preloads **no association**.
+
+  The response is composed of :
+
+    - the fetched records in the body
+  """
   def handle_show(conn, %{"id" => id}, model, repo) do
     record = repo.get(model, id)
 
@@ -86,6 +117,18 @@ defmodule Framboise.Actions do
     end
   end
 
+  @doc """
+  Called by the create function of your controller if not overwritten.
+  It peforms a sql query against the repo you setup your controller to insert a row to the model's table choosed.
+
+  Given params are treated as the record needed to be inserted.
+
+  It validates your record against the model changeset.
+
+  The response is composed of :
+
+    - the inserted record in the body with its generated values (id, timestamp...)
+  """
   def handle_create(conn, new_record, model, repo) do
     changeset = model.changeset(struct!(model, %{}), new_record)
 
@@ -106,6 +149,18 @@ defmodule Framboise.Actions do
     end
   end
 
+  @doc """
+  Called by the update function of your controller if not overwritten.
+  It peforms a sql query against the repo you setup your controller to update a row of the model's table choosed.
+
+  Given params are treated as the record updates.
+
+  It validates your record against the model changeset.
+
+  The response is composed of :
+
+    - the updated record in the body with its generated values (id, timestamp...)
+  """
   def handle_update(conn, %{"id" => id} = record_update, model, repo) do
     record = repo.get(model, id)
 
@@ -131,6 +186,18 @@ defmodule Framboise.Actions do
     end
   end
 
+  @doc """
+  Called by the delete function of your controller if not overwritten.
+  It peforms a sql query against the repo you setup your controller to delete a row of the model's table choosed.
+
+  It accepts params such as:
+
+  - `id` used to query which record to delete
+
+  The response is composed of :
+
+    - the deleted record in the body
+  """
   def handle_delete(conn, %{"id" => id}, model, repo) do
     record = repo.get(model, id)
 
