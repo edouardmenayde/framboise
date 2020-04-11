@@ -1,3 +1,5 @@
+# This project is not maintained and will not be: use at your own risks
+
 # Framboise
 
 Phoenix default rest actions and associated renders for your controller.
